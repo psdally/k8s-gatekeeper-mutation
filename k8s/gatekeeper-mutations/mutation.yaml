@@ -1,0 +1,68 @@
+apiVersion: mutations.gatekeeper.sh/v1beta1
+kind: Assign
+metadata:
+  name: widget-nodeselector
+spec:
+  applyTo:
+  - groups: [""]
+    kinds: ["Pod"]
+    versions: ["v1"]
+  match:
+    scope: Namespaced
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["Pod"]
+    namespaceSelector:
+      matchLabels:
+        businessunit: "widget"
+  location: "spec.nodeSelector"
+  parameters:
+    assign:
+      value:
+        businessunit: "widget"
+--
+apiVersion: mutations.gatekeeper.sh/v1beta1
+kind: Assign
+metadata:
+  name: doodad-nodeselector
+spec:
+  applyTo:
+  - groups: [""]
+    kinds: ["Pod"]
+    versions: ["v1"]
+  match:
+    scope: Namespaced
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["Pod"]
+    namespaceSelector:
+      matchLabels:
+        businessunit: "doodad"
+  location: "spec.nodeSelector"
+  parameters:
+    assign:
+      value:
+        businessunit: "doodad"
+--
+apiVersion: mutations.gatekeeper.sh/v1beta1
+kind: Assign
+metadata:
+  name: shared-nodeselector
+spec:
+  applyTo:
+  - groups: [""]
+    kinds: ["Pod"]
+    versions: ["v1"]
+  match:
+    scope: Namespaced
+    kinds:
+    - apiGroups: ["*"]
+      kinds: ["Pod"]
+    namespaceSelector:
+      matchLabels:
+        businessunit: "shared"
+  location: "spec.nodeSelector"
+  parameters:
+    assign:
+      value:
+        businessunit: "shared'
